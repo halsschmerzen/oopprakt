@@ -28,9 +28,9 @@ public class TeppichhandelControl implements Observer {
    	            Float.parseFloat(breite),
    	         kategorie,
    	        farben.split(";"));
-    		thm.setTh(th);
+    		thm.addTeppich(th);
     		
-    		zeigeInformationsfensterAn("Das Teppich wurde aufgenommen!");
+    		zeigeInformationsfensterAn("Der Teppich wurde aufgenommen!");
        	}
        	catch(Exception exc){
        		System.out.println(exc.getMessage());

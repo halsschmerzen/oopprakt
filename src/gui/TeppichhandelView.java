@@ -149,12 +149,14 @@ public class TeppichhandelView {
 		     	thc.leseAusDatei("txt");
 		    }
     	});
-	    mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				thc.schreibeTeppichInCsvDatei();
-			}	
-	    });
+//	    mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent e) {
+//				thc.schreibeTeppichInCsvDatei();
+//			}	
+//	    });
+	    
+	    mnItmCsvExport.setOnAction(e -> thc.schreibeTeppichInCsvDatei());
     }
     
 

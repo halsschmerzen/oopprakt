@@ -45,7 +45,7 @@ public class TeppichhandelModel implements Observable {
 
 
 	public ArrayList<Teppich> getTeppiche() {
-		return teppiche;
+		return this.teppiche;
 	}
 
 
@@ -53,6 +53,14 @@ public class TeppichhandelModel implements Observable {
 
 	public void setTeppiche(ArrayList<Teppich> teppiche) {
 		this.teppiche = teppiche;
+	}
+	
+	public void addTeppiche(Teppich teppich) {
+		teppiche.add(teppich);
+		
+		for(Teppich t : teppiche) {
+			System.out.println("Prakt 4 Ausgabe: " + t);
+		}
 	}
 
 
@@ -72,7 +80,7 @@ public class TeppichhandelModel implements Observable {
 	}
 	
 	public void addTeppich(Teppich tep) {
-		
+		this.teppiche.add(tep);
 	}
 
 
@@ -117,14 +125,30 @@ public class TeppichhandelModel implements Observable {
 	public void schreibeTeppicheInCsvDatei() {
 		if(getTh() != null) {
 			try {
-				System.out.println(getTh().gibTeppichZurueck(';'));
-				BufferedWriter aus 
-					= new BufferedWriter(new FileWriter("TeppichAusgabe.csv", true));
-				aus.write(th.gibTeppichZurueck(';'));
+//				System.out.println(getTh().gibTeppichZurueck(';'));
+//				BufferedWriter aus 
+//					= new BufferedWriter(new FileWriter("TeppichAusgabe.csv", true));
+//				aus.write(th.gibTeppichZurueck(';'));
+//				aus.close();
+//				System.out.println(th.gibTeppichZurueck(';'));
+//	   			thc.zeigeInformationsfensterAn(
+//		   			"Die Teppiche wurden gespeichert!");
+				BufferedWriter aus = new BufferedWriter(new FileWriter("TeppichAusgabe.csv", false));
+				
+//				for(Teppich t : teppiche) {
+//					
+//					System.out.println(t.gibTeppichZurueck(';'));
+//					
+//				}
+				
+				for(Teppich t : teppiche) {
+					
+					aus.write(t.gibTeppichZurueck(';'));
+					notifyObserver();
+				}
 				aus.close();
-				System.out.println(th.gibTeppichZurueck(';'));
-	   			thc.zeigeInformationsfensterAn(
-		   			"Die Teppiche wurden gespeichert!");
+				
+				
 			}	
 			catch(IOException exc){
 				thc.zeigeFehlermeldungsfensterAn(
@@ -145,15 +169,19 @@ public class TeppichhandelModel implements Observable {
 	public void schreibeTeppichInTxtDatei() {
 		if(getTh() != null) {
 			try {
-				System.out.println(getTh().gibTeppichZurueck(';'));
+				//System.out.println(getTh().gibTeppichZurueck(';'));
 				BufferedWriter aus 
-					= new BufferedWriter(new FileWriter("TeppichAusgabe.txt", true));
-				aus.write(th.gibTeppichZurueck(';'));
-				notifyObserver();
+					= new BufferedWriter(new FileWriter("TeppichAusgabe.txt", false));
+				for(Teppich t : teppiche) {
+
+						aus.write(th.gibTeppichZurueck(';'));
+						notifyObserver();
+					
+				}
 				aus.close();
 				System.out.println(th.gibTeppichZurueck(';'));
-	   			thc.zeigeInformationsfensterAn(
-		   			"Die Teesorten wurden gespeichert!");
+//	   			thc.zeigeInformationsfensterAn(
+//		   			"Die Teesorten wurden gespeichert!");
 			}	
 			catch(IOException exc){
 				thc.zeigeFehlermeldungsfensterAn(

@@ -1,12 +1,14 @@
 package business;
 
+import java.util.ArrayList;
+
 public class Teppich {
 	
     private String artikelnummer;
     private float breite;
     private float laenge;
     private String kategorie;
-    private String[] farben;
+    private ArrayList<String> farben;
 
     
 	
@@ -15,7 +17,16 @@ public class Teppich {
 		this.breite = breite;
 		this.laenge = laenge;
 		this.kategorie = kategorie;
-		this.farben = farben;
+		
+		if(farben==null) {
+			throw new IllegalArgumentException("Farben wurden nicht initialisiert!");
+		}
+		
+		ArrayList<String> arr = new ArrayList<>();
+		for(String s : farben) {
+			arr.add(s);
+		}
+		this.farben = arr;
 	}
 
 	public String getArtikelnummer() {
@@ -50,21 +61,30 @@ public class Teppich {
 		this.kategorie = kategorie;
 	}
 
-	public String[] getFarben() {
+	public ArrayList<String> getFarben() {
 		return farben;
 	}
 
-	public void setFarben(String[] farben) {
+	public void setFarben(ArrayList<String> farben) {
 		this.farben = farben;
+	}
+	
+	public static ArrayList<String> fromStringArrToArrayList(String[] arr) {
+		ArrayList<String> tempArr = new ArrayList<String>();
+		for(String x : arr) {
+			tempArr.add(x);
+		}
+		
+		return tempArr;
 	}
 
 	public String getFarbenalsString(char trenner) {
 		String ergebnis = "";
 		int i = 0;
-		for(i = 0; i < this.getFarben().length - 1; i++) {
-			ergebnis = ergebnis + this.getFarben()[i] + trenner; 
+		for(i = 0; i < this.getFarben().size() - 1; i++) {
+			ergebnis = ergebnis + this.getFarben().get(i) + trenner; 
 		}
-		return ergebnis	+ this.getFarben()[i];
+		return ergebnis	+ this.getFarben().get(i);
 	}
 	
 	public String gibTeppichZurueck(char trenner){
